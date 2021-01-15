@@ -4,11 +4,19 @@
 
 <ion-content>
   <ion-list *ngIf="searchStr.length == 0">
-    <ion-item *ngFor="let c of clients" (click)="showClient(c)">
+    <ion-item *ngFor="let c of clientScroll" (click)="showClient(c)">
       <ion-icon slot="end" name="arrow-redo"></ion-icon>
       <ion-label> {{ c.name }}</ion-label>
     </ion-item>
   </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="crescent"
+      loadingText="cargado datos..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <ion-list *ngIf="searchStr.length > 0">
     <ion-item *ngFor="let c of data" (click)="showClient(c)">
@@ -16,12 +24,4 @@
       <ion-label> {{ c.name }}</ion-label>
     </ion-item>
   </ion-list>
-
-  <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data..."
-    >
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
 </ion-content>

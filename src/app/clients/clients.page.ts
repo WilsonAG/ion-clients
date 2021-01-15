@@ -291,17 +291,18 @@ export class ClientsPage implements OnInit {
     },
   ];
 
+  public clientScroll: Client[] = [];
   public data: Client[] = [];
-  public page = 1;
+  public count = 15;
+
   public searchStr: string = '';
 
-  // @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   constructor(private ac: AlertController) {}
 
   ngOnInit() {
-    this.data = this.clients.slice(0, 15);
-    this.page++;
+    this.clientScroll = this.clients.slice(0, this.count);
   }
 
   async showClient(client: Client) {
@@ -325,9 +326,16 @@ export class ClientsPage implements OnInit {
   }
 
   loadData(event) {
-    if (this.data.length == this.clients.length) {
-      event.target.disabled = true;
-    }
+    setTimeout(() => {
+      if (this.clients.length >= 40) {
+        event.target.complete();
+      }
+
+      const newData = this.clients.slice(this.count, this.count + 5);
+      this.count += 5;
+      this.clientScroll.push(...newData);
+      event.target.complete();
+    }, 500);
   }
 
   getPageData(page: number) {}
