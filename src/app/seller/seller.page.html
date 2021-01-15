@@ -1,0 +1,27 @@
+<app-header title="Vendedor" return="true"></app-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-item>
+        <ion-avatar>
+          <img [src]="seller.image" />
+        </ion-avatar>
+        <ion-card-title> {{ seller.name }} </ion-card-title>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>email: {{seller.email}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Codigo de ventas: {{seller.code}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Telefono empresarial: {{seller.phone}}</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
